@@ -1,6 +1,6 @@
 import { DynamoDBClient, UpdateItemCommand } from "@aws-sdk/client-dynamodb";
-import { middyfy } from "@functions/middleware";
-import { validateEnvVariables } from "@functions/utilities";
+import { middyfy } from "../utilities/middleware";
+import { validateEnvVariables } from "../utilities/utilities";
 import { Event, schema } from "./schema";
 
 type Dependencies = {
@@ -19,10 +19,10 @@ export const builder = (deps: Dependencies) => {
     const updateItem = new UpdateItemCommand({
       TableName: mainTableName,
       Key: {
-        PK: {
+        pk: {
           S: `U#${event.body.name}`,
         },
-        SK: {
+        sk: {
           S: `T#${now}`,
         },
       },

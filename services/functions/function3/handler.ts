@@ -1,5 +1,5 @@
-import { middyfy } from "@functions/middleware";
-import { validateEnvVariables } from "@functions/utilities";
+import { middyfy } from "../utilities/middleware";
+import { validateEnvVariables } from "../utilities/utilities";
 
 type Dependencies = {
   userPoolId: string;

@@ -1,6 +1,6 @@
 import { DynamoDBClient, QueryCommand } from "@aws-sdk/client-dynamodb";
-import { middyfy } from "@functions/middleware";
-import { validateEnvVariables } from "@functions/utilities";
+import { middyfy } from "../utilities/middleware";
+import { validateEnvVariables } from "../utilities/utilities";
 import { Event, Response, responseSchema } from "./schema";
 
 type Dependencies = {
@@ -17,7 +17,7 @@ export const builder = (deps: Dependencies) => {
 
     const updateItem = new QueryCommand({
       TableName: mainTableName,
-      KeyConditionExpression: "PK = :pk AND begins_with(SK, :sk)",
+      KeyConditionExpression: "pk = :pk AND begins_with(sk, :sk)",
       ExpressionAttributeValues: {
         ":pk": {
           S: `U#${event.queryStringParameters.name}`,
